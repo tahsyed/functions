@@ -20,28 +20,6 @@ app.get('/warmup', (request, response) => {
 
 });
 
-app.post('/fights', async (request, response) => {
-  try {
-    const { winner, losser, title } = request.body;
-    const data = {
-      winner,
-      losser,
-      title
-    } 
-    const fightRef = await db.collection('fights').add(data);
-    const fight = await fightRef.get();
-
-    response.json({
-      id: fightRef.id,
-      data: fight.data()
-    });
-
-  } catch(error){
-
-    response.status(500).send(error);
-
-  }
-});
 
 app.get('/getcustomers/:id', async (request, response) => {
   try {
